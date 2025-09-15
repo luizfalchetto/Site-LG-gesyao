@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>LG Gestao de Trafego</title>
+
+   <!-- Google tag (gtag.js) -->
+   <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17544724239"></script>
+   <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'AW-17544724239');
+   </script>
+   <!-- Fim da tag do Google -->
+
+   <style>
+       body {
+           margin: 0;
+           font-family: Arial, sans-serif;
+           background-color: #f5f2f8; 
+           color: #2c1742;
+           text-align: center;
+           padding: 0;
+       }
+       
+       form {
+           background: white;
+           max-width: 400px;
+           margin: 20px auto;
+           padding: 20px;
+           border-radius: 8px;
+           box-shadow: 0 0 15px rgba(44, 23, 66, 0.2);
+       }
+
+       input, button {
+           width: 100%;
+           padding: 10px;
+           margin: 10px 0;
+           border-radius: 8px;
+           border: 1px solid #ccc;
+           font-size: 1em;
+       }
+       
+       button {
+           background-color: #5f3ca6;
+           color: white;
+           border: none;
+           cursor: pointer;
+       }
+
+       button:hover {
+           background-color: #462c7a;
+       }
+
+       input[type="submit"] {
+           background-color: #25D366;
+           color: white;
+           border: none;
+           padding: 15px 25px;
+           font-size: 1.2em;
+           font-weight: bold;
+           border-radius: 8px;
+           cursor: pointer;
+           transition: background-color 0.3s;
+       }
+
+       input[type="submit"]:hover {
+           background-color: #1ebd5a;
+       }
+
+       .whatsapp-btn {
+           display: none; /* começa escondido */
+           background-color: #25D366;
+           color: white;
+           padding: 15px 25px;
+           border-radius: 8px;
+           text-decoration: none;
+           font-size: 1.2em;
+           font-weight: bold;
+           display: inline-flex;
+           align-items: center;
+           gap: 10px;
+           transition: 0.3s;
+           animation: pulse 1.5s infinite; /* animação pulsar */
+           margin-top: 20px;
+       }
+       
+       .whatsapp-btn:hover {
+           background-color: #1ebd5a;
+       }
+       
+       @keyframes pulse {
+           0% {box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.6);}
+           70% {box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);}
+           100% {box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+       }
+   </style>
+</head>
+<body>
+
+<h1>LG Gestão de Tráfego</h1>
+<p>Transforme cliques em clientes. Preencha o formulário abaixo para falar com a gente!</p>
+
+<p>
+<strong>Somos especialistas em transformar cliques em clientes!</strong><br><br>
+💡 Criamos campanhas inteligentes no Meta Ads que geram resultados reais para o seu negócio.<br>
+📈 Estratégias personalizadas para aumentar vendas, engajamento e reconhecimento de marca.<br>
+🎯 Segmentação precisa para atingir exatamente o público que você deseja.<br>
+📊 Análise constante e otimização para maximizar seu investimento.<br>
+🔥 Resultados rápidos e sustentáveis para empresas de todos os portes.<br>
+🤝 Atendimento próximo e focado no seu sucesso.<br>
+💬 Conte com quem entende do mercado e sabe potencializar sua presença online.<br>
+📌 Se você quer mais clientes e mais faturamento, o momento é agora!<br>
+<strong>👉 Preencha o formulário para falar conosco no WhatsApp e descubra como podemos acelerar seus resultados.</strong>
+</p>
+ 
+<!-- Formulário com Formspree -->
+<form id="leadForm" action="https://formspree.io/f/{SEU_ENDPOINT}" method="POST">
+    <input type="text" id="nome" name="nome" placeholder="Seu nome" required />
+    <input type="email" id="email" name="email" placeholder="Seu email" required />
+    <input type="tel" id="telefone" name="telefone" placeholder="Seu telefone" required />
+    
+    <!-- Título personalizado no e-mail -->
+    <input type="hidden" name="_subject" value="Novo Lead">
+    <!-- Define para onde deve responder -->
+    <input type="hidden" name="_replyto" value="luizgustavofalchetto@gmail.com">
+    
+    <input type="submit" value="Enviar" />
+</form>
+ 
+<!-- Botão do Whatsapp - só aparece após envio -->
+<a id="whatsappBtn" class="whatsapp-btn" target="_blank">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
+    alt="WhatsApp"
+    style="width: 24px; height: 24px;">
+    Fale conosco no Whatsapp
+</a>
+ 
+<script>
+    const form = document.getElementById('leadForm');
+    const whatsappBtn = document.getElementById('whatsappBtn');
+
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        // Envia o formulário manualmente
+        fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: { 'Accept': 'application/json' }
+        }).then(response => {
+            if (response.ok) {
+                // Esconde o formulário
+                form.style.display = 'none';
+
+                // Adiciona o link do WhatsApp APENAS após envio
+                whatsappBtn.href = 'https://wa.me/5522999299851'; // coloque seu número aqui
+
+                // Mostra o botão
+                whatsappBtn.style.display = 'inline-flex';
+            } else {
+                alert('Houve um problema ao enviar. Tente novamente.');
+            }
+        }).catch(error => {
+            alert('Erro ao enviar. Verifique sua conexão.');
+        });
+    });
+
+    // Dispara evento de conversão somente no clique do botão do WhatsApp
+    whatsappBtn.addEventListener('click', function() {
+        gtag('event', 'conversion', {
+            'send_to': 'AW-17544724239/qHPkCMKUwJcbEI_-_K1B',
+            'value': 1.0,
+            'currency': 'BRL'
+        });
+    });
+</script>
+</body>
+</html>
